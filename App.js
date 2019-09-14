@@ -1,46 +1,29 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Button,
-  Text,
-  FlatList
-} from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
+import NameInput from "./components/NameInput";
+import NameItem from "./components/NameItem";
 
 export default function App() {
-  const [name, setName] = useState("");
   const [names, setNames] = useState([]);
 
-  const addName = () => {
+  const addName = name => {
     setNames(names => [
       ...names,
       {
-        id: names.length.toString()
+        id: names.length.toString(),
+        name
       }
     ]);
   };
 
   return (
     <View style={styles.screen}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="name"
-          style={styles.input}
-          onChangeText={setName}
-          value={name}
-        />
-        <Button title="ADD" onPress={addName} />
-      </View>
+      <NameInput addName={addName} />
       <View>
         <FlatList
           data={names}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.listItem}>
-              <Text>{name}</Text>
-            </View>
-          )}
+          renderItem={({ item }) => <NameItem title={item.name} />}
         />
       </View>
     </View>
@@ -50,20 +33,5 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 50
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  input: {
-    borderBottomColor: "black",
-    flex: 1,
-    margin: 10,
-    borderBottomWidth: 1
-  },
-  listItem: {
-    marginVertical: 10,
-    backgroundColor: "lightblue",
-    padding: 10
   }
 });
