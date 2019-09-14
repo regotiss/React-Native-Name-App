@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Button, FlatList } from "react-native";
 import NameInput from "./components/NameInput";
 import NameItem from "./components/NameItem";
 
 export default function App() {
   const [names, setNames] = useState([]);
+  const [addMode, setAddMode] = useState(false);
 
   const addName = name => {
     setNames(names => [
@@ -14,6 +15,7 @@ export default function App() {
         name
       }
     ]);
+    setAddMode(false);
   };
 
   const deleteName = nameId => {
@@ -22,7 +24,8 @@ export default function App() {
 
   return (
     <View style={styles.screen}>
-      <NameInput addName={addName} />
+      <Button title="Add Name" onPress={() => setAddMode(true)}/>
+      <NameInput show={addMode} addName={addName} />
       <View>
         <FlatList
           data={names}

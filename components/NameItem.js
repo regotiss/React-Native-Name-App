@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const nameItem = props => {
+const NameItem = props => {
     const {item, onDelete} = props;
     return (
         <TouchableOpacity onPress={() => onDelete(props.item.id)}>
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
     padding: 10
   }
 });
-export default nameItem;
+export default NameItem;
