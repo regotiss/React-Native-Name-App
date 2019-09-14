@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, Button, Text } from "react-native";
+import { StyleSheet, TextInput, View, Button, Text, ScrollView } from "react-native";
 
 export default function App() {
   const [name, setName] = useState("");
@@ -20,13 +20,13 @@ export default function App() {
         />
         <Button title="ADD" onPress={addName} />
       </View>
-      <View>
+      <ScrollView>
         {names.map(name => (
           <View key={name} style={styles.listItem}>
             <Text>{name}</Text>
           </View>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
