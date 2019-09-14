@@ -7,7 +7,6 @@ export default function App() {
 
   const addName = () => {
     setNames(names => [...names, name]);
-    setName('');
   };
 
   return (
@@ -23,7 +22,9 @@ export default function App() {
       </View>
       <View>
         {names.map(name => (
-          <Text key={name}>{name}</Text>
+          <View key={name} style={styles.listItem}>
+            <Text>{name}</Text>
+          </View>
         ))}
       </View>
     </View>
@@ -43,5 +44,10 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 10,
     borderBottomWidth: 1
+  },
+  listItem: {
+    marginVertical: 10,
+    backgroundColor: 'lightblue',
+    padding: 10
   }
 });
