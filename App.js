@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, Button, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Button,
+  Text,
+  FlatList
+} from "react-native";
 
 export default function App() {
   const [name, setName] = useState("");
   const [names, setNames] = useState([]);
 
   const addName = () => {
-    setNames(names => [...names, name]);
+    setNames(names => [
+      ...names,
+      {
+        id: names.length.toString()
+      }
+    ]);
   };
 
   return (
@@ -20,13 +32,17 @@ export default function App() {
         />
         <Button title="ADD" onPress={addName} />
       </View>
-      <ScrollView>
-        {names.map(name => (
-          <View key={name} style={styles.listItem}>
-            <Text>{name}</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <View>
+        <FlatList
+          data={names}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.listItem}>
+              <Text>{name}</Text>
+            </View>
+          )}
+        />
+      </View>
     </View>
   );
 }
@@ -47,7 +63,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     marginVertical: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: "lightblue",
     padding: 10
   }
 });
