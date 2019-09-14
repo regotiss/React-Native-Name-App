@@ -16,6 +16,10 @@ export default function App() {
     ]);
   };
 
+  const deleteName = nameId => {
+    setNames(names => names.filter(name => name.id !== nameId));
+  };
+
   return (
     <View style={styles.screen}>
       <NameInput addName={addName} />
@@ -23,7 +27,7 @@ export default function App() {
         <FlatList
           data={names}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <NameItem title={item.name} />}
+          renderItem={({ item }) => <NameItem onDelete={deleteName} item={item} />}
         />
       </View>
     </View>

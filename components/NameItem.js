@@ -1,11 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const nameItem = (props) => (
-  <View style={styles.listItem}>
-    <Text>{props.title}</Text>
-  </View>
-);
+const nameItem = props => {
+    const {item, onDelete} = props;
+    return (
+        <TouchableOpacity onPress={() => onDelete(props.item.id)}>
+          <View style={styles.listItem}>
+            <Text>{item.name}</Text>
+          </View>
+        </TouchableOpacity>
+      );
+};
 
 const styles = StyleSheet.create({
   listItem: {
