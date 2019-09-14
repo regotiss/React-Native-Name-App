@@ -25,7 +25,7 @@ export default function App() {
   return (
     <View style={styles.screen}>
       <Button title="Add Name" onPress={() => setAddMode(true)}/>
-      <NameInput show={addMode} addName={addName} />
+      <NameInput show={addMode} onCancel={() => setAddMode(false)} addName={addName} />
       <View>
         <FlatList
           data={names}
